@@ -12,6 +12,7 @@
             @keyup.enter="goPage"
             :rules="[rules.required, rules.insta]"
           ></v-text-field>
+          <v-text-field v-show="false" />
         </v-col>
         <!-- BUTTON -->
         <v-col cols="4" md="2" sm="3" class="align-self-top">
@@ -126,7 +127,7 @@ export default {
   },
   methods: {
     goPage() {
-      if (this.$route.params.username !== this.query.trim()) {
+      if (this.$route.params.username !== this?.query?.trim() && this.isFormValid && this?.query?.trim()) {
         this.$router.push({ path: `/watch/${this.query.trim()}`});
       }
     },
@@ -152,7 +153,7 @@ export default {
             username: user.username,
             posts: posts
           };
-          console.log(this.page);
+          // console.log(this.page);
         })
         .catch(error => {
           this.error = error;
